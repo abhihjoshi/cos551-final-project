@@ -1,0 +1,3 @@
+[submodule "genomic_benchmarks"]
+	path = genomic_benchmarks
+	url = https://github.com/ML-Bioinfo-CEITEC/genomic_benchmarks.git

@@ -1,17 +1,22 @@
-from Bio import SeqIO
-from Bio import motifs
+import argparse
 import numpy as np
-
 import matplotlib.pyplot as plt
 
-def load_sequences(fasta_file):
-    sequences = list(SeqIO.parse(fasta_file, "fasta"))
-    return sequences
+from Bio import SeqIO
+from Bio import motifs
 
 if __name__ == "__main__":
 
-    fasta_path = "/Users/abhishek/Documents/classes/cos551/data/ncbi_dataset_mouse/ncbi_dataset/data/GCF_000001635.27/GCF_000001635.27_GRCm39_genomic.fna"
-    sequences = load_sequences(fasta_path)
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--path",
+        type=str,
+        required=True
+    )
+    args = parser.parse_args()
+
+    fasta_path = args.path
+    sequences = list(SeqIO.parse(fasta_path, "fasta"))
 
     seq_length = [len(seq) for seq in sequences]
     
