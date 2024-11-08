@@ -2,6 +2,13 @@
 
 Team Members: Zirui "Colin" Wang, Abhishek Joshi, Supraj Gunda
 
+## Cloning the repo
+
+Run the following command to clone the repo including submodules.
+```
+git clone --recurse-submodules git@github.com:abhihjoshi/cos551-final-project.git
+```
+
 ## Gerating data
 
 Before generating data, please ensure you have the genomics_benchmarks submodule present in you directory.
