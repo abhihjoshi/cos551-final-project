@@ -9,6 +9,8 @@ Run the following command to clone the repo including submodules.
 git clone --recurse-submodules git@github.com:abhihjoshi/cos551-final-project.git
 ```
 
+**Note**: The genomics_benchmark submodule provides .tsv data corresponding to the start and env positions of sequences. For replication and benchmarking purposes, we include this repo as a submodule to get access to the data provided.
+
 ## Gerating data
 
 Before generating data, please ensure you have the genomics_benchmarks submodule present in you directory.
