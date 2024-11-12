@@ -17,7 +17,8 @@ class CombinedGeneticDataset(Dataset):
                  fasta_paths: Dict[str, str],
                  seq_reports: Dict[str, str],
                  seq_length: int,
-                 dataset_size: int):
+                 dataset_size: int,
+                 tokenizer = None):
         
         self.fasta_paths = fasta_paths
         self.seq_reports = seq_reports
@@ -44,6 +45,11 @@ class CombinedGeneticDataset(Dataset):
                 if chromosome_seq.id in valid_ids:
                     self.seq_data[name][chromosome_seq.id] = str(chromosome_seq.seq).strip('N')
 
+        self.tokenizer = tokenizer
+        if not tokenizer:
+            from transformers import AutoTokenizer
+            self.tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
     def __len__(self):
         return self.dataset_size
 
@@ -54,23 +60,26 @@ class CombinedGeneticDataset(Dataset):
         seq = seq.upper()
         start = random.randint(0, len(seq) - self.seq_length - 1)
         res = seq[start:start + self.seq_length]
-        next_token = seq[start + self.seq_length]
+        next_token = seq[start+1:start + self.seq_length + 1]
 
-        return res, next_token
+        res = self.tokenizer(res)["input_ids"]
+        next_token = self.tokenizer(next_token)["input_ids"]
+
+        return torch.tensor(res), torch.tensor(next_token)
 
 if __name__ == "__main__":
     
     fasta_paths = {
-        "human_1": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/ncbi_dataset/data/GCF_000001405.40/GCF_000001405.40_GRCh38.p14_genomic.fna",
-        "human_2": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/ncbi_dataset/data/GCF_009914755.1/GCF_009914755.1_T2T-CHM13v2.0_genomic.fna",
-        "dog": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_dog/ncbi_dataset/data/GCF_011100685.1/GCF_011100685.1_UU_Cfam_GSD_1.0_genomic.fna",
+        # "human_1": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/ncbi_dataset/data/GCF_000001405.40/GCF_000001405.40_GRCh38.p14_genomic.fna",
+        # "human_2": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/ncbi_dataset/data/GCF_009914755.1/GCF_009914755.1_T2T-CHM13v2.0_genomic.fna",
+        # "dog": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_dog/ncbi_dataset/data/GCF_011100685.1/GCF_011100685.1_UU_Cfam_GSD_1.0_genomic.fna",
         "mouse": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_mouse/ncbi_dataset/data/GCF_000001635.27/GCF_000001635.27_GRCm39_genomic.fna"
     }
 
     seq_reports = {
-        "human_1": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/sequence_report.tsv",
-        "human_2": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/sequence_report.tsv",
-        "dog": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_dog/sequence_report.tsv",
+        # "human_1": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/sequence_report.tsv",
+        # "human_2": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/sequence_report.tsv",
+        # "dog": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_dog/sequence_report.tsv",
         "mouse": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_mouse/sequence_report.tsv"
     }
 
