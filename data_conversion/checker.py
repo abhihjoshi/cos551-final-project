@@ -73,17 +73,20 @@ def process_fna(file_path, output_file, num_lines=None):
             
         # sort the dictionary by key
         chr_dict = dict(sorted(chr_dict.items()))
-        combined_sequence = '>chr1\n'
+        combined_sequence = ''
         curr_line = ''
         for k, v in tqdm(chr_dict.items()):
             if k == '>CHRY':
                 # ignore this chromosome
                 continue
-            v = k + v if k != '>CHR1' else v
-            ignore_length = len(k) if k != '>CHR1' else 0
+            if curr_line != '':
+                curr_line += '\n'
+                combined_sequence += curr_line
+                curr_line = ''
+            combined_sequence += k.lower() + '\n'
             for i, elem in enumerate(v):
                 # Replace non-ACGT characters with N after the first line
-                if elem not in set('ACGT') and i >= ignore_length:
+                if elem not in set('ACGT'):
                     elem = 'N'
                 if len(curr_line) == 50:
                     curr_line += '\n'
@@ -150,7 +153,7 @@ def compare_files(file1, file2):
     return mismatched_lines
 
 # # Example usage
-# file1_path = '/scratch/gpfs/zw1300/misc/COS551/data/processed_individual/hg38_hyena.ml.fa'
+# file1_path = '/scratch/gpfs/zw1300/misc/COS551/hyena-dna/data/hg38/hg38.ml.fa'
 # file2_path = '/scratch/gpfs/zw1300/misc/COS551/data/processed_individual/hg38.ml.fa'
 
 # mismatches = compare_files(file1_path, file2_path)
