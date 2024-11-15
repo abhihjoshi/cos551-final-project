@@ -2,13 +2,14 @@ from tqdm import tqdm
 import re
 
 def extract_chromosome_name(text):
+    print(text)
     match = re.search(r'\bCHROMOSOME (\d+|[A-Z])\b', text)
     if match:
         result = f">CHR{match.group(1)}"
-        if 'GRCH38 PRIMARY ASSEMBLY' not in text:
+        if 'CHM13' not in text:
             return False
-        if 'UNLOCALIZED GENOMIC SCAFFOLD' in text:
-            return False
+        # if 'UNLOCALIZED GENOMIC SCAFFOLD' in text:
+        #     return False
         return result
     else:
         print("No match found for text:", text)
@@ -140,7 +141,7 @@ def compare_files(file1, file2):
                 if line1 != line2:
                     # if '>' in line2 or '>' in line1:
                     print(f"Line {line_number} mismatch:\n  File1: {line1.strip()}\n  File2: {line2.strip()}")
-                    breakpoint()
+                    # breakpoint()
                     mismatched_lines.append((line_number, line1.strip(), line2.strip()))
 
                 line_number += 1
@@ -167,14 +168,20 @@ def compare_files(file1, file2):
 # input_file = '/scratch/gpfs/zw1300/misc/COS551/hyena-dna/data/hg38/hg38.ml.fa'
 # output_file = '/scratch/gpfs/zw1300/misc/COS551/data/processed_individual/hg38_hyena.ml.fa'
 # process_fna(input_file, output_file, num_lines=None)
-input_file = '/scratch/gpfs/zw1300/misc/COS551/data/ncbi_dataset/data/GCF_000001405.26/GCF_000001405.26_GRCh38_genomic.fna'
-output_file = '/scratch/gpfs/zw1300/misc/COS551/data/processed_individual/hg38.ml.fa'
-process_fna(input_file, output_file, num_lines=None)
+# input_file = '/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/ncbi_dataset/data/GCF_009914755.1/GCF_009914755.1_T2T-CHM13v2.0_genomic.fna'
+# output_file = '/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/ncbi_dataset/data/GCF_000001405.40/processed_human_2.fna'
+# process_fna(input_file, output_file, num_lines=None)
 
 # # Example usage
 # print("Reading line {} to {} from the file".format(0, 10))
 # file_path = '/scratch/gpfs/zw1300/misc/COS551/data/processed_individual/hg38.ml.fa'
 # examine_top_lines(file_path, 0, 10)
 # print("Reading line {} to {} from the file".format(200, 205))
-# file_path = '/scratch/gpfs/zw1300/misc/COS551/hyena-dna/data/hg38/hg38.ml.fa'
-# examine_top_lines(file_path, 0, 10)
+# examine_top_lines(file_path, 1000000, 1000010)
+
+# file1 = '/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/ncbi_dataset/data/GCF_000001405.40/processed_human_1.fna'
+file1 = '/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/ncbi_dataset/data/GCF_009914755.1/processed_human_2.fna'
+file2 = '/Users/abhishek/Documents/classes/cos551/temp/data/human/hg38.ml.fa'
+file3 = 
+compare_files(file1=file1, file2=file2)
+
