@@ -27,3 +27,9 @@ An example command is shown below:
 ```
 python scripts/get_sequences.py --fasta_path ncbi_data/ncbi_dataset_mouse/ncbi_dataset/data/GCF_000001635.27/GCF_000001635.27_GRCm39_genomic.fna --seq_report_path ncbi_data/ncbi_dataset_mouse/sequence_report.tsv --benchmark_dataset dummy_mouse_enhancers_ensembl
 ```
+
+## Visualizations
+
+`analysis/make_actg_dist.py`: creating aggregated counts of single nucleotide by chromosome as well as most frequent kmers from chromosome 1-22, X and Y. Note that the initial draft of some blocks of code is created by ChatGPT with prompting and manually engineered to suit our use cases.
+`analysis/plot_actg_dist.py`: creating visualizations of ACGTN distributions. Note that the initial draft of some blocks of code is created by ChatGPT with prompting and manually engineered to suit our use cases.
+`analysis/plot_kmer_bump_chart.py` creating bump chart visualization of kmer relative rankings among genomes from different humans. Note that the initial draft of some blocks of code is created by ChatGPT with prompting and manually engineered to suit our use cases.
