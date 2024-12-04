@@ -70,7 +70,7 @@ def plot_frequencies(data):
 
     # Normalize each index
     normalized_lists = []
-    for i in range(len(a_counts)):  # Assuming all lists have the same length
+    for i in range(buckets):  # Assuming all lists have the same length
         total = sum(l[i] for l in lists)  # Total across all lists at index i
         normalized_lists.append([l[i] / total for l in lists])
 
