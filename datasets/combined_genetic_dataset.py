@@ -70,16 +70,16 @@ class CombinedGeneticDataset(Dataset):
 if __name__ == "__main__":
     
     fasta_paths = {
-        # "human_1": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/ncbi_dataset/data/GCF_000001405.40/GCF_000001405.40_GRCh38.p14_genomic.fna",
-        # "human_2": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/ncbi_dataset/data/GCF_009914755.1/GCF_009914755.1_T2T-CHM13v2.0_genomic.fna",
-        # "dog": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_dog/ncbi_dataset/data/GCF_011100685.1/GCF_011100685.1_UU_Cfam_GSD_1.0_genomic.fna",
+        "human_1": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/ncbi_dataset/data/GCF_000001405.40/GCF_000001405.40_GRCh38.p14_genomic.fna",
+        "human_2": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/ncbi_dataset/data/GCF_009914755.1/GCF_009914755.1_T2T-CHM13v2.0_genomic.fna",
+        "dog": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_dog/ncbi_dataset/data/GCF_011100685.1/GCF_011100685.1_UU_Cfam_GSD_1.0_genomic.fna",
         "mouse": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_mouse/ncbi_dataset/data/GCF_000001635.27/GCF_000001635.27_GRCm39_genomic.fna"
     }
 
     seq_reports = {
-        # "human_1": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/sequence_report.tsv",
-        # "human_2": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/sequence_report.tsv",
-        # "dog": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_dog/sequence_report.tsv",
+        "human_1": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_1/sequence_report.tsv",
+        "human_2": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_human_2/sequence_report.tsv",
+        "dog": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_dog/sequence_report.tsv",
         "mouse": "/Users/abhishek/Documents/classes/cos551/final_project/ncbi_data/ncbi_dataset_mouse/sequence_report.tsv"
     }
 

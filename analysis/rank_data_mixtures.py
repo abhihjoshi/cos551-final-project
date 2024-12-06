@@ -28,7 +28,7 @@ ranks = [
 ]
 
 # Colors for the models
-colors = ['lightcoral', 'lightsalmon', 'lightgreen', 'lightskyblue', 'plum']
+colors = ['red', 'darkorange', 'green', 'skyblue', 'plum']
 
 # Create the plot
 plt.figure(figsize=(12, 8))
@@ -38,9 +38,10 @@ for i, model in enumerate(mixtures):
 
 # Customizing the plot
 plt.xlabel('Datasets')
-plt.ylabel('Rank')
-plt.title('Data Mixture Ranks for Genomic Benchmarks Evaluations')
-plt.xticks(rotation=45, ha='right')
+plt.ylabel('Rank', size=20)
+plt.title('Data Mixture Ranks for Genomic\nBenchmarks Evaluations', size=20)
+plt.xticks(rotation=45, ha='right', fontsize=14)
+plt.yticks(fontsize=20)
 plt.gca().invert_yaxis()  # Invert y-axis so rank 1 is at the top
 plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5), title="Data Mixture")
 plt.grid(axis='y', linestyle='--', alpha=0.7)

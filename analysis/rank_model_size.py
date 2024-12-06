@@ -26,7 +26,7 @@ ranks = [
 ]
 
 # Colors for the models
-colors = ['lightcoral', 'lightsalmon', 'lightgreen', 'lightskyblue', 'plum']
+colors = ['red', 'darkorange', 'green', 'skyblue', 'plum']
 
 # Create the plot
 plt.figure(figsize=(12, 8))
@@ -36,11 +36,13 @@ for i, model in enumerate(models):
 
 # Customizing the plot
 plt.xlabel('Datasets')
-plt.ylabel('Rank')
-plt.title('Success Rate Across Model Size')
+plt.ylabel('Rank', size=20)
+plt.title('Success Rate Across Model Size', size=20)
 plt.xticks(rotation=45, ha='right', fontsize=14)
+plt.yticks(fontsize=20)
+
 plt.gca().invert_yaxis()  # Invert y-axis so rank 1 is at the top
-plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5), title="Log Model Size")
+plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5), title="Model Layers", fontsize=18)
 plt.grid(axis='y', linestyle='--', alpha=0.7)
 
 plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
