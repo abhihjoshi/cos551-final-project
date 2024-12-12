@@ -13,7 +13,7 @@ datasets = [
     "Human vs. Worm Classification",
     "Human Enhancers (Cohn et al.)",
     "Human Enhancers Ensembl",
-    "human_ensembl_regulatory",
+    "Human Regulatory Classification",
     "Human non-TATA Promoters",
     "Human OCR Ensembl"
 ]
@@ -70,6 +70,6 @@ for i, ax in enumerate(axes):
 
 plt.legend()
 plt.tight_layout(rect=[0, 0, 1, 0.95])
-plt.show()
+# plt.show()
 
 plt.savefig('baseline_comparision.pdf')
