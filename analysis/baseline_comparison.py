@@ -1,15 +1,20 @@
+"""
+Plots the success of the baseline model against models trained with
+our custom data mixture (specifically diverse species).
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 
 datasets = [
-    "dummy_mouse_enhancers_ensembl",
-    "demo_coding_vs_intergenomic_seqs",
-    "demo_human_or_worm",
-    "human_enhancers_cohn",
-    "human_enhancers_ensembl",
+    "Mouse Enhancer Ensemble",
+    "Protein Coding vs. non-Coding",
+    "Human vs. Worm Classification",
+    "Human Enhancers (Cohn et al.)",
+    "Human Enhancers Ensembl",
     "human_ensembl_regulatory",
-    "human_nontata_promoters",
-    "human_ocr_ensembl"
+    "Human non-TATA Promoters",
+    "Human OCR Ensembl"
 ]
 
 x = [2, 4, 8, 16]
@@ -36,13 +41,13 @@ axes = axes.flatten()
 
 for i, ax in enumerate(axes):
     # plots the baseline with confidence intervals
-
     ci_baseline = []
     for acc in baseline[:, i]:
         std_err = (acc * (1 - acc) / dataset_sizes[i]) ** 0.5
         margin_of_err = 1.96 * std_err
         ci_baseline.append(margin_of_err)
 
+    # plot the diverse species with confidence intervals
     ci_div_spec = []
     for acc in div_spec[:, i]:
         std_err = (acc * (1 - acc) / dataset_sizes[i]) ** 0.5
@@ -54,8 +59,6 @@ for i, ax in enumerate(axes):
 
     ax.plot(x, baseline[:, i], c="lightcoral", marker='o', label="Baseline") 
     ax.fill_between(x, (baseline[:, i]-ci_baseline), (baseline[:, i]+ci_baseline), color='lightcoral', alpha=.1)
-
-    # plots our model trained on diverse species genomic data
     ax.plot(x, div_spec[:, i], c="lightseagreen", marker='o', label="Diverse Species")
     ax.fill_between(x, (div_spec[:, i]-ci_div_spec), (div_spec[:, i]+ci_div_spec), color='lightseagreen', alpha=.1)
 
@@ -67,3 +70,5 @@ for i, ax in enumerate(axes):
 plt.legend()
 plt.tight_layout(rect=[0, 0, 1, 0.95])
 plt.show()
+
+plt.savefig('baseline_comparision.pdf')

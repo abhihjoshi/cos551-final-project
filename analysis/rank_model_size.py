@@ -1,16 +1,21 @@
+"""
+Rank plot for the success rate for each model on
+the eval dataset (models differ in size).
+"""
+
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MaxNLocator
 import numpy as np
 
 # Dataset names
 datasets = [
-    "demo_coding_vs_intergenomic_seqs",
-    "demo_human_or_worm",
-    "human_enhancers_cohn",
-    "human_enhancers_ensembl",
-    "human_ensembl_regulatory",
-    "human_nontata_promoters",
-    "human_ocr_ensembl"
+    "Human vs. Worm Classification",
+    "Protein Coding vs. non-Coding",
+    "Human Regulatory Classification",
+    "Human Enhancers Ensembl",
+    "Human Enhancers (Cohn et al.)",
+    "Human non-TATA Promoters",
+    "Human OCR Ensembl"
 ]
 
 # Model names
@@ -32,13 +37,13 @@ colors = ['red', 'darkorange', 'green', 'skyblue', 'plum']
 plt.figure(figsize=(12, 8))
 
 for i, model in enumerate(models):
-    plt.plot(datasets, ranks[i], label=model, marker='o', color=colors[i])
+    plt.plot(datasets, ranks[i], label=model, marker='o', color=colors[i], linewidth=3)
 
 # Customizing the plot
-plt.xlabel('Datasets')
+plt.xlabel('Datasets', size=20)
 plt.ylabel('Rank', size=20)
-plt.title('Success Rate Across Model Size', size=20)
-plt.xticks(rotation=45, ha='right', fontsize=14)
+plt.title('Model Sizes Ranks for Genomic\nBenchmarks Evaluations', size=20)
+plt.xticks(rotation=45, ha='right', fontsize=20)
 plt.yticks(fontsize=20)
 
 plt.gca().invert_yaxis()  # Invert y-axis so rank 1 is at the top
@@ -51,4 +56,4 @@ plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
 plt.tight_layout()
 # plt.show()
 
-plt.savefig('model_rankings.png')
+plt.savefig('model_rankings.pdf')
