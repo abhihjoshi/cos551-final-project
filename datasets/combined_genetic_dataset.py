@@ -1,3 +1,7 @@
+"""
+Author: Abhishek Joshi
+Generates a PyTorch dataset for an N-class classification task (future work)
+"""
 import tqdm
 import random
 from typing import Dict

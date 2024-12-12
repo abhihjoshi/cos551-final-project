@@ -1,3 +1,8 @@
+"""
+Author: Abhishek Joshi
+Preliminary analysis of fasta file for the project proposal
+"""
+
 import argparse
 import numpy as np
 import matplotlib.pyplot as plt
@@ -20,6 +25,7 @@ if __name__ == "__main__":
 
     seq_length = [len(seq) for seq in sequences]
     
+    # gets statistical information for the sequences
     min_length = np.min(seq_length)
     max_length = np.max(seq_length)
     mean_length = np.mean(seq_length)
@@ -27,7 +33,6 @@ if __name__ == "__main__":
     std_dev_length = np.std(seq_length)
     percentiles = np.percentile(seq_length, [25, 50, 75])
 
-    # Display the results
     print("Sequence Length Statistics:")
     print(f"Total: {len(seq_length)}")
     print(f"Minimum Length: {min_length:.1e}")

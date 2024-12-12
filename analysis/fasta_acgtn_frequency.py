@@ -1,3 +1,7 @@
+"""
+Author: Abhishek Joshi
+Gets the frequency on nucleotides in a genome assembly
+"""
 import argparse
 from tqdm import tqdm
 from collections import defaultdict

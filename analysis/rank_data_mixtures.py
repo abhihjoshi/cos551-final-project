@@ -1,6 +1,20 @@
 """
+Author: Abhishek Joshi
 Rank plot for the success rate for each model on
 the eval dataset (models differ in pretraining data).
+
+GPT Prompt: 
+Can you write me code that will make a rank plot where each line represents a new model and there are 8 ticks for the 8 datasets
+can you actually write me code so that I create 8 different plots, 1 for each dataset. Here are my dataset names: "dummy_mouse_enhancers_ensembl",
+            "demo_coding_vs_intergenomic_seqs",
+            "demo_human_or_worm",
+            "human_enhancers_cohn",
+            "human_enhancers_ensembl",
+            "human_ensembl_regulatory",
+            "human_nontata_promoters",
+            "human_ocr_ensembl"
+how can i move the legend out of the box to the right
+how can i make the y axis have only integer values
 """
 
 import matplotlib.pyplot as plt
@@ -22,8 +36,6 @@ datasets = [
 # Model names
 mixtures = ["H1 True", "H1 Pseudo", "H5 Pseudo", "H1S4 Pseudo", "H5S4 Pseudo"]
 
-# Example ranks for each model on each dataset (ensure dimensions match)
-# Replace with actual rank data
 ranks = [
     [2, 4, 1, 2, 3, 4, 4, 4],
     [2, 3, 3, 4, 4, 5, 5, 3],

@@ -1,4 +1,5 @@
 """
+Author: Abhishek Joshi
 Rank plot for the success rate for each model on
 the eval dataset (models differ in size).
 """
@@ -21,8 +22,6 @@ datasets = [
 # Model names
 models = ["2", "4", "8", "16"]
 
-# Example ranks for each model on each dataset (ensure dimensions match)
-# Replace with actual rank data
 ranks = [
     [4, 4, 4, 4, 4, 4, 4],
     [3, 3, 2, 3, 3, 3, 3],

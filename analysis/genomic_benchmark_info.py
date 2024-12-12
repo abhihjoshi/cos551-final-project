@@ -1,3 +1,7 @@
+"""
+Author: Abhishek Joshi
+Gets basic info for evaluation datasets
+"""
 import argparse
 from genomic_benchmarks.data_check import list_datasets
 from genomic_benchmarks.data_check import info

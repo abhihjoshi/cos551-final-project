@@ -1,4 +1,5 @@
 """
+Authors: Abhishek Joshi
 Plots the success of the baseline model against models trained with
 our custom data mixture (specifically diverse species).
 """
