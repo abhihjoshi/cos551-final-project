@@ -1,0 +1,47 @@
+---
+title: "QCB455/COS551 Final Project N Counts"
+author: "Supraj Gunda"
+output: html_notebook
+---
+
+Produces figure 2 from the final paper
+
+```{r}
+library(Biostrings)
+```
+
+```{r}
+genome <- readDNAStringSet("./fastaFiles/GCF_GRCh38.fna")
+
+# Calculate nucleotide composition for all sequences
+composition <- letterFrequency(genome, letters = c("A", "T", "G", "C", "N"), as.prob = TRUE)
+
+print(composition)
+
+# Locate positions of 'N' in each sequence
+n_positions <- vmatchPattern("N", genome)
+
+# Summarize regions with N content for each sequence
+n_summary <- sapply(n_positions, function(matches) {
+  if (length(matches) > 0) {
+    data.frame(start = start(matches), end = end(matches), width = width(matches))
+  } else {
+    NULL
+  }
+})
+
+# Display ambiguous regions
+print(n_summary)
+```
+
+```{r}
+# Proportion of N bases in each sequence
+n_content <- rowSums(letterFrequency(genome, "N")) / width(genome)
+```
+
+
+```{r}
+# Bar plot of N content
+barplot(n_content, main = "Proportion of N Bases per Sequence", xlab = "Sequence", ylab = "Proportion of N")
+```
+

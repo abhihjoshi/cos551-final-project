@@ -1,0 +1,106 @@
+---
+title: "QCB455/COS551 Final Project PCA Plot"
+author: "Supraj Gunda"
+output: html_notebook
+---
+
+Produces figure 4 from the final paper
+
+```{r message=FALSE}
+library(Biostrings)
+library(ggplot2)
+library(ggrepel)
+```
+using ggrepel package to help labels not overlap
+
+```{r}
+# function to find all the frequencies of each kmer per genome
+calculateKmerFrequencies <- function(seq, k) {
+  kmers <- oligonucleotideFrequency(DNAString(seq), width = k)
+  normalizedKmers <- kmers / sum(kmers)
+  return(normalizedKmers)
+}
+```
+
+```{r}
+# function to calculate k-mer frequencies for multiple genomes
+calculateAllKmers <- function(files, k) {
+  kmerList <- list()
+  for (file in files) {
+    genome <- readDNAStringSet(file)
+    genomeKmers <- calculateKmerFrequencies(as.character(genome[[1]]), k)
+    kmerList[[file]] <- genomeKmers
+  }
+  return(kmerList)
+}
+```
+
+
+```{r}
+# so it is generalizable to any number of genomes
+genomeFiles <- c("./fastaFiles/GCA_Ash1.fna", "./fastaFiles/GCA_ASM.fna", "./fastaFiles/GCA_hg.fna", 
+                  "./fastaFiles/GCF_cattle.fna", "./fastaFiles/GCF_dog.fna",
+                  "./fastaFiles/GCF_GRCh38.fna", "./fastaFiles/GCF_mouse.fna", "./fastaFiles/GCF_pig.fna",
+                  "./fastaFiles/GCF_T2T.fna")
+
+# labels for PCA plot
+customLabels <- c("Ash1", "ASM", "hg", "cattle", 
+                   "dog", "h38", "mouse", "pig", "T2T")
+
+# so it is generalizable to any number of k values, although for reasonability using k=4 and k=8
+kValues <- c(4, 8)
+
+# Options for plot appearance
+labelFontSize <- 8
+axisFontSize <- 20
+titleFontSize <- 25
+pointColors <- c("blue", "blue", "blue", "green", "yellow", "blue", "orange", "purple", "blue")  # should reorder this so that all blues appear next to each other
+
+# loop for each k value
+for (k in kValues) {
+  # in this matrix, rows represent all the genomes and columns represent all the different kmers for that k value
+  allKmers <- calculateAllKmers(genomeFiles, k)
+  kmerMatrix <- do.call(rbind, lapply(allKmers, as.numeric))
+  rownames(kmerMatrix) <- customLabels
+  
+  # doing the actual PCA
+  pcaResult <- prcomp(kmerMatrix, scale. = TRUE)
+  
+  pcaData <- data.frame(
+    PC1 = pcaResult$x[, 1],
+    PC2 = pcaResult$x[, 2],
+    Label = customLabels
+  )
+  
+  # plotting the PCA
+  plot <- ggplot(pcaData, aes(x = PC1, y = PC2, label = Label)) +
+    geom_point(aes(color = Label), size = 3) +
+    geom_text_repel(aes(label = Label), size = labelFontSize, max.overlaps = Inf) +
+    scale_color_manual(values = pointColors) +
+    labs(title = paste("PCA of K-mer Frequencies (k =", k, ")"),
+         x = "Principal Component 1",
+         y = "Principal Component 2") +
+    theme_minimal() +
+    theme(
+      axis.title = element_text(size = axisFontSize),
+      plot.title = element_text(size = titleFontSize, face = "bold"),
+      legend.position = "none"
+    )
+  
+  # save as image
+  ggsave(filename = paste0("PCA_k", k, "nonoverlap.png"), plot = plot, dpi = 300, width = 8, height = 6)
+}
+```
+
+Heirarchical CLustering Dendrogram based on PC1 and PC2 (produces extra graph not included in final paper)
+```{r}
+pcaScores <- pcaResult$x[, 1:2]  # so you only use PC1 and PC2
+
+# clustering step
+distMatrix <- dist(pcaScores)
+hclustResult <- hclust(distMatrix, method = "ward.D2")
+
+# plotting the dendrogram
+plot(hclustResult, main = "Hierarchical Clustering Dendrogram (based on PCA)",
+     xlab = "Genome", ylab = "Distance", sub = "")
+```
