@@ -1,3 +1,5 @@
+# Author: Colin Wang, drafted by chatgpt
+
 import random
 from tqdm import tqdm
 random.seed(42)

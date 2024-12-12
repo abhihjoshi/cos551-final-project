@@ -1,3 +1,5 @@
+# Author: Colin Wang
+
 from glob import glob
 import re
 import numpy as np
@@ -62,7 +64,7 @@ def extract_metrics(file):
 
         return d_model, n_layer, bed_file, fasta_file, max_epochs, ppl
 
-directory = '/scratch/gpfs/zw1300/misc/COS551/hyena-dna/slurm_pretrain'
+directory = '/scratch/gpfs/zw1300/misc/COS551/hyena-dna/slurm_pretrain2'
 files = glob(f'{directory}/*.out')
 
 for file in files:

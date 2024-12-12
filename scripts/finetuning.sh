@@ -1,3 +1,5 @@
+# Author: Colin Wang
+
 source $CONDA_INIT
 conda activate hyena-dna
 

@@ -1,3 +1,5 @@
+# Author: Colin Wang, drafted by chatgpt
+
 from tqdm import tqdm
 import re
 

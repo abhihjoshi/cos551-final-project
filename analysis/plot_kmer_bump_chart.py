@@ -1,3 +1,5 @@
+# Author: Colin Wang, drafted by chatgpt
+
 import pandas as pd
 import matplotlib.pyplot as plt
 

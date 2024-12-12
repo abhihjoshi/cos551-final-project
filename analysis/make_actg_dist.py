@@ -1,3 +1,5 @@
+# Author: Colin Wang
+
 import matplotlib.pyplot as plt
 import os
 import re

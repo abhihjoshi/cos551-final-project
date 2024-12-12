@@ -1,3 +1,5 @@
+# Author: Colin Wang
+
 from glob import glob
 import re
 import numpy as np
@@ -56,22 +58,33 @@ files = glob(f'{directory}/*.out')
 sorted_files = sorted(files, key=lambda x: int(os.path.basename(x).split('-')[-1].split('.')[0]))
 
 # print("\n".join(sorted_files))
+# configs = [
+#     "100 human seq",
+#     "20 diverse h",
+#     "100 base h",
+#     "20 diverse s",
+#     "100 human seq",
+#     "10 diverse hs",
+#     "100 base h",
+#     "20 diverse s",
+#     "20 diverse h",
+#     "100 human seq",
+#     "10 diverse hs",
+#     "100 base h",
+#     "10 diverse hs",
+#     "20 diverse h",
+#     "20 diverse s",
+# ]
+
 configs = [
-    "100 human seq",
-    "20 diverse h",
-    "100 base h",
-    "20 diverse s",
-    "100 human seq",
-    "10 diverse hs",
-    "100 base h",
-    "20 diverse s",
-    "20 diverse h",
-    "100 human seq",
-    "10 diverse hs",
-    "100 base h",
-    "10 diverse hs",
-    "20 diverse h",
-    "20 diverse s",
+    "Base",
+    "Diverse",
+    "Base",
+    "Base",
+    "Diverse",
+    "Base",
+    "Diverse",
+    "Diverse",
 ]
 for i, file in enumerate(sorted_files):
     print(configs[i])

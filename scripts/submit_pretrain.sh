@@ -1,3 +1,5 @@
+# Author: Colin Wang
+
 max_idx=1
 num_gpus=1
 d_model=128

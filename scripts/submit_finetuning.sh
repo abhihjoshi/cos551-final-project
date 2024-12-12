@@ -1,3 +1,5 @@
+# Author: Colin Wang
+
 model_ckpts=(
     "/scratch/gpfs/zw1300/misc/COS551/hyena-dna/outputs/2024-11-29/19-51-58-125330/checkpoints/test/loss.ckpt"
     "/scratch/gpfs/zw1300/misc/COS551/hyena-dna/outputs/2024-11-29/19-51-58-126147/checkpoints/test/loss.ckpt"
